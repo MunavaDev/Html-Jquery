@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Section A - Question 1</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <style>
+        .tile {
+            height: 100px;
+            width: 100px;
+            margin: 10px;
+        }
+
+        .tile:hover {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<!-- DO NOT CHANGE THE CODE ABOVE -->
+
+
+<!-- Complete/Modify the HTML code below -->
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-4 col-sm-3 col-md-2 col-lg-1">
+            <div class="tile bg-dark " data-toggle="popover" data-content="Dark"></div>
+        </div>
+
+        <div class="col-xs-4 col-sm-3 col-md-2 col-lg-1">
+            <div class="tile bg-primary" data-toggle="popover" data-content="Primary"></div>
+        </div>
+
+        <div class="col-xs-4 col-sm-3 col-md-2 col-lg-1">
+            <div class="tile bg-success" data-toggle="popover" data-content="Success"></div>
+        </div>
+
+        <div class="col-xs-4 col-sm-3 col-md-2 col-lg-1">
+            <div class="tile bg-danger" data-toggle="popover" data-content="danger"></div>
+        </div>
+
+        <div class="col-xs-4 col-sm-3 col-md-2 col-lg-1">
+            <div class="tile bg-warning" data-toggle="popover" data-content="warning"></div>
+        </div>
+
+        <div class="col-xs-4 col-sm-3 col-md-2 col-lg-1">
+            <div class="tile bg-info" data-toggle="popover" data-content="Info"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Complete/Modify the HTML code above -->
+
+<!-- DO NOT CHANGE THE CODE BELOW -->
+
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="./js/jquery-3.5.1.slim.min.js"></script>
+<script src="./js/popper.min.js"></script>
+<script src="./js/bootstrap.min.js"></script>
+<script>
+    $(() => {
+        $('[data-toggle="popover"]').popover();
+    });
+</script>
+</body>
+</html>

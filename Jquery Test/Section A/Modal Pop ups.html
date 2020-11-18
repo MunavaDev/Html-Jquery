@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Section A - Question 2</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <style>
+        .tile {
+            height: 100px;
+            width: 100px;
+            margin: 10px;
+        }
+
+        .tile:hover {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div>
+            <div class="tile text-primary" id="primary">
+                <h3>Primary</h3>
+            </div>
+
+            <div class="tile text-success" id="success">
+                <h3 >Success</h3>
+            </div>
+
+            <div class="tile text-danger" id="danger">
+                <h3 >Danger</h3>
+            </div>
+
+            <div class="tile text-warning" id="warning">
+                <h3 >Warning</h3>
+            </div>
+
+            <div class="tile text-info" id="info">
+                <h3 >Info</h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL -->
+    <div id="colormodal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                <!--Add Spans with unique ID /Empty Class--> 
+                    <p id="previous">Previous: <span id="prev" class=""><span> </p>
+                    <p id="current">Current: <span id="curr" class=""><span>  </p>
+                    <p id="next">Next: <span id="nex" class=""><span>  </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="./js/jquery-3.5.1.slim.min.js"></script>
+    <script src="./js/popper.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            // DO NOT CHANGE ANY OF THE ABOVE CODE
+
+            // Complete the function below
+            $(".tile").on("click", function () {
+                // Declare array
+                colors = [];
+                //Get colors names using the id attribute we added to each tile matching its color
+                var Color1 = $('#primary').attr('id');
+                colors.push(Color1);
+
+                var Color2 = $('#success').attr('id');
+                colors.push(Color2);
+
+                var Color3 = $('#danger').attr('id');
+                colors.push(Color3);
+
+                var Color4 = $('#warning').attr('id');
+                colors.push(Color4);
+
+                var Color5 = $('#info').attr('id');
+                colors.push(Color5);
+                  
+                //Get Current clicked id using this attribute
+                var Current = this.id;
+
+                //Find Color in array
+                // !!! let is javascript and jquerys way of declaring a constant  !!!!//
+                let obj = colors.indexOf(Current);
+                var CurFound = colors[obj];
+                $('#curr').html(CurFound);
+                //first clear existing class / background color
+                $("#curr").removeAttr("class");
+                //change to new one 
+                $("#curr").addClass("text-" + Current);
+                 debugger
+
+                //Get Previous Color by subtracting 1 from index of Current to find in Array colors
+                let Prev = parseInt(obj) - 1;
+                let objprev = colors[Prev];
+                //check if object does indeed exist
+                if(objprev === undefined)
+                {
+                  //If not then display not found Text and class color is nothing
+                  $("#prev").removeAttr("class");
+                  $('#prev').html("None Found !!!");
+                }
+                else
+                {
+                //first clear existing class / background color
+                  $("#prev").removeAttr("class");
+                //If found then display text and class color is text attribute
+                  $('#prev').html(objprev);
+                  $("#prev").addClass("text-" + objprev) ;
+                }
+                debugger //This works like a breakpoint in Jquery, allows you to hpver over values to ensure correct passing in your
+                         //Browswers F12 - (Inspect Element ) Debugger pane at runtime
+
+                //Get Next Color by adding 1 from index of Current to find in Array colors
+                var Next = obj + 1;
+                let objNex = colors[Next];
+                //check if object does indeed exist
+                if(objNex === undefined)
+                {
+                  $("#nex").removeAttr("class");
+                  $('#nex').html("None Found !!!");
+
+                }
+                else
+                {
+                  //first clear existing class / background color
+                   $("#nex").removeAttr("class");
+                  //If found then display text and class color is text attribute
+                   $('#nex').html(objNex);
+                   $("#nex").addClass("text-" + objNex) ;
+                }
+                debugger
+                //Display Modal after Creating Everything
+                $('#colormodal').modal('show'); 
+            });
+            // Complete the function above
+
+            // DO NOT CHANGE ANY OF THE BELOW CODE
+        });
+    </script>
+</body>
+
+</html>

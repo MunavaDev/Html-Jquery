@@ -1,0 +1,146 @@
+﻿@model IEnumerable<JsonJquery.Models.Customer>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<br />
+
+<button class="btn btn-primary"  data-toggle="modal" data-target="#model-create"><i class="glyphicon glyphicon-pencil"></i> Create New </button>
+
+
+<br />
+<br />
+<table class="table table-responsive     " style="border-radius:20px;background-color:rgba(0,0,0,0.88);color:white;width:800px">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Surname
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerSurname)
+            </td>
+            <td class="btn-group">
+                <button class="btn btn-primary"><i class="glyphicon glyphicon-pencil"></i></button>
+                <button class="btn btn-success"><i class="glyphicon glyphicon-eye-open"></i></button>
+                <button class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
+            </td>
+        </tr>
+    }
+
+</table>
+
+<!--Create -->
+<div class="modal fade" id="model-create" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+    <div class="modal-dialog">
+
+        <div class="modal-content" style="background-color:black;color:white;border-radius:15px">
+
+            <div class="modal-header">
+                <button style="color:white" type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">Add New Customer</h4>
+            </div>
+
+            <div class="modal-body">
+                <label>Name</label>
+                <input class="form-control" type="text" id="cusName" name="cusName" style="width:200px;border-radius:20px;background-color:rgba(0,0,0,0);color:white" required />
+                <label>Surname</label>
+                <input class="form-control" type="text" id="cusSurname" name="cusSurname" style="width:200px;border-radius:20px;background-color:rgba(0,0,0,0);color:white" required />
+            </div>
+
+            <div class="modal-footer">
+                <button type="submit" id="btnAdd" style="border-radius:20px" class="btn btn-success" > <i class="glyphicon glyphicon-plus"></i> Add Customer </button>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!--Edit-->
+<!--Delete-->
+
+
+
+
+
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+
+            $('#btnAdd').click(function () {
+
+                var name = $("#cusName").val();
+                var surname = $("#cusSurname").val();
+                var price = $("#cusPrice").val();
+
+                console.log(name + surname);
+                //Check for valid input 
+                if (name.trim() == "") {
+                    Swal.fire('<span style="color:#f0ad4e"> Hold on....  Name is Required');
+                    return;
+                }
+                if (surname.trim() == "") {
+                    Swal.fire('<span style="color:#f0ad4e"> Hold on.... Surname is Required');
+                    return;
+                }
+               //json adding to db
+                $.ajax({
+                    type: "POST",
+                    url: '/Customers/CreateCustomer',
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify({
+                        "name": name,
+                        "surname": surname
+                    }),
+                    success: function (data) {
+                        console.log(data);
+                        if (data.status) {
+                            
+                            Swal.fire(
+                                '<span style="color:#32CD32">Customer Added Successfully',
+                                '',
+                                'success'
+                            );
+                            debugger
+                            //clear the input fields 
+                            $("#cusName").val('');
+                            $("#cusSurname").val('');
+
+                        }
+                    },
+                    error: function () {
+                        Swal.fire({
+                            type: 'error',
+                            title: 'Oops...',
+                            text: 'Something went wrong!',
+                            footer: '<a href ><span style="color:dodgerblue">Why do I have this issue?</a>'
+                        });
+                    }
+                }).done(
+                    setTimeout(function () {
+                        //referesh Page
+                        location.reload();
+                    }, 4000)
+                );;
+            });
+
+        });
+    </script>
+
+}

@@ -1,0 +1,29 @@
+﻿@model List<STQ2.Models.Product>
+@{
+    ViewBag.Title = "Products";
+}
+
+@* DO NOT CHANGE ANY OF THE ABOVE CODE *@
+
+
+@* Complete the code below *@
+    <table class="table table-striped">
+        <tr>
+            <th>Description</th>
+            <th>Price</th>
+        </tr>
+        <!--Create foreach loop to iterate Over Items -->
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>@product.Description</td>
+                <td>@product.Price</td>
+            </tr>
+        }
+
+    <tr>
+        <!--Sum Entire Model Price column -->
+        <td colspan="2">Total Price: R @Model.Sum(x => x.Price)</td>
+    </tr>
+    </table>
+@* Complete the code above *@
